@@ -1,0 +1,25 @@
+<html>
+<head></head>
+
+<body>
+<a href = '/index'>Go Back To Main Page</a>
+
+{{#posts.posts}}
+<h1>{{title}}</h1>
+<h2>Author: {{username}}</h2>
+<p>{{body}}</p>
+{{/posts.posts}}
+<h1>Comments:</h1>
+<ul>
+{{#posts.comments}}
+<li>
+    {{comment}}
+    By - {{username}}
+</li>
+{{/posts.comments}}
+</ul>
+
+</body>
+
+
+</html>

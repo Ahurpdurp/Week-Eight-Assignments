@@ -2,6 +2,7 @@
 <head></head>
 
 <body>
+{{messageLogin}}
 <form method = 'POST' action = '/index'>
 <input name = "blogTitle" placeholder = "Enter Blog Title..."><br>
 <input name = "blogBody" style="height:200px" placeholder = "Enter Blog Body..."><br>
@@ -12,13 +13,19 @@
 
 <form action = '/index' method = 'POST'>
 <button formaction = '/index/view-all'>View All Blog Entries!</button>
+<button formaction = '/index/view-user-blogs'>View All the Blogs You've Created!</button>
+<button formaction = '/logout'>Logout</button>
 </form>
 
 {{#posts}}
 <form action = '/index/delete-post' method = 'POST'>
 <h1>{{title}}</h1>
+<h2>Author: {{username}}</h2>
 <p>{{body}}</p>
 <input name = 'postid' type = 'hidden' value = {{postid}}>
+<input name = 'comment' placeholder = 'Enter comment...'>
+<button formaction = '/index/enter-comment'>Enter Comment</button><br>
+<button formaction = '/index/details'>View Blog Details</button>
 <button formaction = '/index/update-post'>Update Blog</button>
 <button type = 'submit'>Delete Post</button>
 </form>
