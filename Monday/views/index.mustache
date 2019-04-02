@@ -1,0 +1,30 @@
+<html>
+<head></head>
+
+<body>
+<form method = 'POST' action = '/index'>
+<input name = "blogTitle" placeholder = "Enter Blog Title..."><br>
+<input name = "blogBody" style="height:200px" placeholder = "Enter Blog Body..."><br>
+<button type = 'submit'>Enter Blog!</button>
+</form>
+
+{{message}}
+
+<form action = '/index' method = 'POST'>
+<button formaction = '/index/view-all'>View All Blog Entries!</button>
+</form>
+
+{{#posts}}
+<form action = '/index/delete-post' method = 'POST'>
+<h1>{{title}}</h1>
+<p>{{body}}</p>
+<input name = 'postid' type = 'hidden' value = {{postid}}>
+<button formaction = '/index/update-post'>Update Blog</button>
+<button type = 'submit'>Delete Post</button>
+</form>
+{{/posts}}
+
+</body>
+
+
+</html>

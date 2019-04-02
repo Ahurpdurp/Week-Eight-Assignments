@@ -1,0 +1,16 @@
+<html>
+<head></head>
+
+<body>
+{{#post}}
+<form method = 'POST' action = '/index/update-post-final'>
+<input type = 'hidden' name = 'postid' value = '{{postid}}'>
+<input name = "blogTitle" value = '{{title}}'><br>
+<input name = "blogBody" style="height:200px" value = '{{body}}'><br>
+<button type = 'submit'>Update Blog!</button>
+</form>
+{{/post}}
+</body>
+
+
+</html>
