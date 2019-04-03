@@ -1,0 +1,38 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<form action = '/index/add-item' method = 'post'>
+<input name = 'title' placeholder = 'Title...'>
+<input name = 'body' placeholder = 'Enter text here...'>
+<input name = 'category' placeholder = "Category (Ex. Python...)">
+<button type = 'submit'>Enter Blog!</button>
+</form>
+
+<h4>{{Message}}</h4>
+
+{{message}}
+
+<form action = '/index/view-all' method = 'POST'>
+<button>View All Blog Entries!</button>
+<input name = 'categoryFilter' placeholder = 'Enter a Category to filter!'>
+<button formaction = '/index/filter'>Filter!</button>
+</form>
+
+{{#posts}}
+<form action = '/index/delete-post' method = 'POST'>
+<h1>{{title}}</h1>
+<p>{{body}}</p>
+<input name = 'id' type = 'hidden' value = {{id}}>
+<p>Category: {{category}}<p>
+<button formaction = '/index/update-post'>Update Blog</button>
+<button type = 'submit'>Delete Post</button>
+</form>
+{{/posts}}
+
+</body>
+
+
+</html>
