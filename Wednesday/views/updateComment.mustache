@@ -1,0 +1,15 @@
+<html>
+<head></head>
+
+<body>
+{{#posts}}
+<form method = 'POST' action = '/index/update-comment-final'>
+<input type = 'hidden' name = 'commentId' value = '{{id}}'>
+<input name = "comment" style="height:50px" value = '{{comment}}'><br>
+<button type = 'submit'>Edit Comment!</button>
+</form>
+{{/posts}}
+</body>
+
+
+</html>

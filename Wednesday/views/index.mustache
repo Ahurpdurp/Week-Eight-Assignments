@@ -27,6 +27,18 @@
 <p>{{body}}</p>
 <input name = 'id' type = 'hidden' value = {{id}}>
 <p>Category: {{category}}<p>
+<h2>Comments</h2>
+<ul>{{#comments}}
+    <li style = 'list-style-type:none;'>{{comment}}</li>
+    <form method = "POST">
+    <input type = 'hidden' name = 'commentId' value = '{{id}}'>
+    <button formaction = '/index/update-comment'>edit</button>
+    <button formaction = 'deleteComment'>delete</button>
+    </form>
+{{/comments}}</ul>
+</ul>
+<input name = 'comment'>
+<button formaction = '/index/add-comment'>Add Comment</button>
 <button formaction = '/index/update-post'>Update Blog</button>
 <button type = 'submit'>Delete Post</button>
 </form>

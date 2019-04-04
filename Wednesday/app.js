@@ -30,13 +30,28 @@ app.post('/index/add-item', (req,res) => {
 })
 
 app.get('/index/view-all', (req,res) => {
-    models.Posts.findAll({raw: true}).then((posts) => {
+    models.Posts.findAll(
+        {include: [
+            {
+              model: models.Comments, // include the model review
+              as: 'comments' // alias to access review is reviews
+            }
+        ]
+        }).then((posts) => {
         res.render('index',{posts:posts})
       })
 })
 
 app.post('/index/view-all', (req,res) => {
-    models.Posts.findAll({raw: true}).then((posts) => {
+    models.Posts.findAll(
+        {include: [
+            {
+              model: models.Comments, // include the model review
+              as: 'comments' // alias to access review is reviews
+            }
+        ]
+        }).then((posts) => {
+            console.log(posts)
         res.render('index',{posts:posts})
       })
 })
@@ -56,8 +71,7 @@ app.post('/index/update-post', (req,res) => {
     models.Posts.findAll({
         where: {
             id: postId
-        },
-        raw: true
+        }
         }).then((posts) => {
         res.render('update',{posts:posts})
       })
@@ -74,15 +88,64 @@ app.post('/index/update-post-final', (req, res) => {
     res.redirect('/index')
 })
 
+app.post('/index/update-comment', (req,res) => {
+    let commentId = req.body.commentId
+    models.Comments.findAll({
+        where: {
+            id: commentId
+        }
+        }).then((posts) => {
+        console.log(posts)
+        res.render('updateComment',{posts:posts})
+      })
+})
+
+app.post('/index/update-comment-final', (req, res) => {
+    let commentId = req.body.commentId
+    let comment = req.body.comment
+    models.Comments.update(
+        {comment:comment},
+        {where:{id:commentId}}
+    )
+    res.redirect('/index')
+})
+
 app.post('/index/filter', (req,res) => {
     let categoryFilter = req.body.categoryFilter
     models.Posts.findAll(
         {
             where: {category:categoryFilter}
-        },
-        {raw: true}).then((posts) => {
+        }).then((posts) => {
         res.render('index',{posts:posts})
       })
+})
+
+app.post('/index/add-comment', (req,res) => {
+    let postid = req.body.id
+    let username = "test"
+    let comment = req.body.comment
+    models.Comments.build({
+        postid: postid,
+        username: username, 
+        comment: comment
+    })
+    .save()
+    .then(x => {
+        res.redirect('/index/view-all')
+    })
+    .catch(x => {
+        res.redirect('/index/view-all')
+    })
+})
+
+app.post('/index/deleteComment', (req,res) => {
+    let commentId = req.body.commentId
+    models.Comments.destroy({
+        where: {
+            id: commentId
+        }
+    })
+    res.redirect('/index/view-all')
 })
 
 app.listen(3000, () => {

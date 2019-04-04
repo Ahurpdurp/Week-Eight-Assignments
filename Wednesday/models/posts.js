@@ -6,7 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING
   }, {});
   Posts.associate = function(models) {
-    // associations can be defined here
+    Posts.hasMany(models.Comments,{
+      as: 'comments',
+      foreignKey: 'postid'
+    })
   };
   return Posts;
 };
